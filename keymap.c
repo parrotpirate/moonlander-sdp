@@ -594,12 +594,31 @@ void td_shortcat_reset(qk_tap_dance_state_t *state, void *user_data) {
 //     moonlander_right_led_3_off();
 // }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case TD(TD_LSHIFT):
+            return 200;
+        case TD(TD_RSHIFT):
+            return 200;
+        case TD(TD_COLON):
+            return 200;
+        case TD(TD_RGUI):
+            return 175;
+        case TD(TD_CAPS):
+            return 200;
+        case TD(TD_SHORTCAT):
+            return 200;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_LSHIFT]     = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, td_lshift_finished, td_lshift_reset, 200),
-    [TD_RSHIFT]     = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, td_rshift_finished, td_rshift_reset, 200),
-    [TD_COLON]      = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, td_colon_finished, td_colon_reset, 200),
-    [TD_RGUI]       = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, td_rgui_finished, td_rgui_reset, 175),
-    [TD_CAPS]       = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, td_caps_finished, td_caps_reset, 200),
-    // [TD_FLSH]       = ACTION_TAP_DANCE_FN_ADVANCED_TIME(td_flsh_each, td_flsh_finished, td_flsh_reset, 300),
-    [TD_SHORTCAT]   = ACTION_TAP_DANCE_FN_ADVANCED_TIME(NULL, td_shortcat_finished, td_shortcat_reset, 200),
+    [TD_LSHIFT]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_lshift_finished, td_lshift_reset),
+    [TD_RSHIFT]     = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_rshift_finished, td_rshift_reset),
+    [TD_COLON]      = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_colon_finished, td_colon_reset),
+    [TD_RGUI]       = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_rgui_finished, td_rgui_reset),
+    [TD_CAPS]       = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_caps_finished, td_caps_reset),
+    // [TD_FLSH]       = ACTION_TAP_DANCE_FN_ADVANCED(td_flsh_each, td_flsh_finished, td_flsh_reset, 300),
+    [TD_SHORTCAT]   = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_shortcat_finished, td_shortcat_reset),
 };
